@@ -91,6 +91,10 @@ int memcmp( const void * s1, const void * s2, size_t n );
 */
 int strcmp( const char * s1, const char * s2 );
 
+/* strcasecmp, strncasecmp - compare two strings ignoring case */
+int strcasecmp(const char *s1, const char *s2);
+int strncasecmp(const char *s1, const char *s2, size_t n);
+
 /* Compare the character arrays s1 and s2, interpreted as specified by the
    LC_COLLATE category of the current locale.
    Returns 0 if s1 == s2, a negative number if s1 < s2, and a positive number if
@@ -185,6 +189,9 @@ char * strerror( int errnum );
 /* Returns the length of the string s (excluding terminating '\0').
 */
 size_t strlen( const char * s );
+
+/* duplicate a string */
+char *strdup(const char *s);
 
 #ifdef __cplusplus
 }

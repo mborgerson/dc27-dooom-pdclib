@@ -25,6 +25,19 @@
 /* trying again. (Empty by default.)                                          */
 #define _PDCLIB_IO_RETRY_OP( stream )
 
+
+#include <stdint.h>
+static void dbg_io_write_8(uint16_t port, uint8_t val)
+{
+  asm volatile (
+    "outb    %%al, %%dx;"
+    /* Outputs  */ : /* None */
+    /* Inputs   */ : "a" (val), "d" (port)
+    /* Clobbers */ : /* None */
+    );
+}
+
+
 int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )
 {
     /* No need to handle buffers > INT_MAX, as PDCLib doesn't allow them */
@@ -39,8 +52,19 @@ int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )
     */
     for ( retries = _PDCLIB_IO_RETRIES; retries > 0; --retries )
     {
-        unsigned int amount_written;
+        unsigned int amount_written = 0;
         int status;
+
+
+        if (stream == stdout || stream == stderr) {
+            int i;
+            for (i = 0; i < stream->bufidx - written; i++) {
+                dbg_io_write_8(0xe9, stream->buffer[written+i]);
+                amount_written++;
+            }
+            return 1;
+        } else {
+
         status = XWriteFile(stream->handle, stream->buffer + written, stream->bufidx - written, &amount_written);
         if (!status)
         {
@@ -53,6 +77,9 @@ int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )
             memmove( stream->buffer, stream->buffer + written, stream->bufidx );
             return EOF;
         }
+
+        }
+
         written += (_PDCLIB_size_t)amount_written;
         stream->pos.offset += amount_written;
         if ( written == stream->bufidx )

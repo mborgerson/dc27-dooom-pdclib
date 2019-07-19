@@ -174,6 +174,9 @@ void _Exit( int status );
 */
 char * getenv( const char * name );
 
+/* change or add an environment variable */
+int putenv(char *string);
+
 /* If string is a NULL pointer, system() returns nonzero if a command processor
    is available, and zero otherwise. If string is not a NULL pointer, it is
    passed to the command processor. If system() returns, it does so with a
