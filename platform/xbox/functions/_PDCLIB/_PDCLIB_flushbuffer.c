@@ -62,7 +62,6 @@ int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )
                 dbg_io_write_8(0xe9, stream->buffer[written+i]);
                 amount_written++;
             }
-            return 1;
         } else {
 
         status = XWriteFile(stream->handle, stream->buffer + written, stream->bufidx - written, &amount_written);
