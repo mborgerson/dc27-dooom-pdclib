@@ -16,7 +16,7 @@
 
 void _PDCLIB_Exit( int status )
 {
-    HalReturnToFirmware( HalQuickRebootRoutine );
+    HalReturnToFirmware( HalRebootRoutine );
 }
 
 #endif
