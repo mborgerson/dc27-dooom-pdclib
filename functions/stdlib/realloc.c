@@ -4,6 +4,8 @@
    Permission is granted to use, modify, and / or redistribute at will.
 */
 
+#if 0
+
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
@@ -52,5 +54,7 @@ int main( void )
     /* tests covered in malloc test driver */
     return TEST_RESULTS;
 }
+
+#endif
 
 #endif

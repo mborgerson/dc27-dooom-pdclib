@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#if 0
+
 #ifndef REGTEST
 
 #include "pdclib/_PDCLIB_glue.h"
@@ -423,5 +425,7 @@ int main( void )
 #endif
     return TEST_RESULTS;
 }
+
+#endif
 
 #endif

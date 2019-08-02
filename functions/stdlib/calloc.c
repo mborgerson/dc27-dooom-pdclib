@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if 0
+
 #ifndef REGTEST
 
 void * calloc( size_t nmemb, size_t size )
@@ -44,5 +46,7 @@ int main( void )
     free( s );
     return TEST_RESULTS;
 }
+
+#endif
 
 #endif

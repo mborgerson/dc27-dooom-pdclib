@@ -6,6 +6,8 @@
 
 #include <stdlib.h>
 
+#if 0
+
 #ifndef REGTEST
 
 #include "pdclib/_PDCLIB_int.h"
@@ -48,5 +50,7 @@ int main( void )
     TESTCASE( true );
     return TEST_RESULTS;
 }
+
+#endif
 
 #endif
